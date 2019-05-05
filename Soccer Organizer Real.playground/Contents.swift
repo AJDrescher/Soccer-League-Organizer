@@ -74,13 +74,16 @@ var teamSharks: [[String: String]] = []
 var teamDragons: [[String: String]] = []
 var teamRaptors: [[String: String]] = []
 
+var ourLeague = [teamRaptors, teamDragons, teamSharks]
+let numberOfTeams = ourLeague.count
+
 for i in 0...expPlayers.count - 1 {
-    if i % 3 == 0 {
+    if i % numberOfTeams == 0 {
         var newPlayer = expPlayers[i]
         newPlayer.updateValue("Dragons", forKey: "team")
         newPlayer.updateValue("March 17th, 1pm", forKey: "practicetime")
         teamDragons.append(newPlayer)
-    } else if i % 3 == 1 {
+    } else if i % numberOfTeams == 1 {
         var newPlayer = expPlayers[i]
         newPlayer.updateValue("Sharks", forKey: "team")
         newPlayer.updateValue("March 17th, 3pm", forKey: "practicetime")
@@ -94,12 +97,12 @@ for i in 0...expPlayers.count - 1 {
 }
 
 for i in 0...noExpPlayers.count - 1 {
-    if i % 3 == 1 {
+    if i % numberOfTeams == 1 {
         var newPlayer = expPlayers[i]
         newPlayer.updateValue("Sharks", forKey: "team")
         newPlayer.updateValue("March 17th, 3pm", forKey: "practicetime")
         teamSharks.append(newPlayer)
-    } else if i % 3 == 0 {
+    } else if i % numberOfTeams == 0 {
         var newPlayer = expPlayers[i]
         newPlayer.updateValue("Raptors", forKey: "team")
         newPlayer.updateValue("March 18th, 1pm", forKey: "practicetime")
@@ -111,6 +114,9 @@ for i in 0...noExpPlayers.count - 1 {
         teamDragons.append(newPlayer)
     }
 }
+
+ourLeague = [teamSharks, teamDragons, teamRaptors]
+
 
 // now lets check average heights
 
@@ -131,14 +137,14 @@ func getAverageHeightOf(team: [[String: String]]) -> Double {
  
  */
 
-var ourLeague = [teamRaptors, teamDragons, teamSharks]
+
 
 func createTeamLettersFor (league: [[[String: String]]]) -> [String] {
     var letters: [String] = []
     for team in 0...league.count - 1 {
         var teamLetters: [String] = []
         for player in 0...league[team].count - 1{
-            let letter = "Dear \(league[team][player]["parents"]!) , your childs name is \(league[team][player]["name"]!) and their team is \(league[team][player]["team"]!). This is their practice date and time: \(league[team][player]["practicetime"]!)"
+            let letter = "Dear \(league[team][player]["parents"]!) , your childs name is \(league[team][player]["name"]!) and their team is \(league[team][player]["team"]!). This is their practice date and time: \(league[team][player]["practicetime"]!)! "
             teamLetters.append(letter)
         }
         letters += teamLetters
@@ -152,4 +158,13 @@ let ourLeagueLetters = createTeamLettersFor(league: ourLeague)
 for letter in ourLeagueLetters {
     print(letter)
 }
+
+// all letters formatted in one String variable "letters"
+var letters = ""
+
+for piece in ourLeagueLetters {
+    letters += piece
+}
+print(letters)
+
 
