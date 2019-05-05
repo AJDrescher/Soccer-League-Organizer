@@ -159,7 +159,7 @@ for letter in ourLeagueLetters {
     print(letter)
 }
 
-// all letters formatted in one String variable "letters"
+// all letters formatted in one String variable "letters", array of letters can be found above, stored in "ourLeagueLetters"
 var letters = ""
 
 for piece in ourLeagueLetters {
